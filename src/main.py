@@ -2,8 +2,8 @@
     Script to auto reload a webpage by pressing ctrl + r every second.
     Used of external module pyautogui.
      *author: Suraj Kumar Giri.
-     *Date: 17-08-2022 (Last Updated)
-     *Time: 13:40:20
+     *Date: 30-08-2022 (Last Updated)
+     *Time: 22:40:20
 """
 from pyautogui import hotkey
 from time import sleep
@@ -74,25 +74,33 @@ def autoReloadPage(timeSpan: int | None, timeInterval: float | None = 0.8) -> No
             sleep(timeInterval)
 
 
-print("\033[1;36m\033[2J\033[HDo you want to add time span for auto reloading the webpage?")
-print("\033[1;32mIf yes then write time (in minutes) else press enter or anything else for auto reloading page for infinite duration..")
-try:
-    timeSpan = int(input("\033[1;35mEnter time span (in minutes): \033[0m"))
-    print("\033[1;32mSelected Time Span is ", timeSpan, " minutes.\033[0m")
-except ValueError:  # either user press enter or written any value other than integer.
-    print("\033[1;31mSelected Time Span is Infinite.\033[0m")
-    timeSpan = None
+def main():
+    print(
+        "\033[1;36m\033[2J\033[HDo you want to add time span for auto reloading the webpage?")
+    print("\033[1;32mIf yes then write time (in minutes) else press enter or anything else for auto reloading page for infinite duration..")
+    try:
+        timeSpan = int(
+            input("\033[1;35mEnter time span (in minutes): \033[0m"))
+        print("\033[1;32mSelected Time Span is ", timeSpan, " minutes.\033[0m")
+    except ValueError:  # either user press enter or written any value other than integer.
+        print("\033[1;31mSelected Time Span is Infinite.\033[0m")
+        timeSpan = None
 
-try:
-    timeInterval = float(input(
-        "\033[1;36mWrite time interval for auto reloading the webpage (press enter or anything else for default 0.8 sec) in sec: "))
-except ValueError:  # either user press enter or written any string value
-    print("\033[4;32mSelected Time Interval is 0.8 sec.\033[0m")
-    timeInterval = None
-else:
-    print("\033[1;32mSelected Time Interval is ", timeInterval, " sec.\033[0m")
-finally:
-    if timeInterval is None:
-        autoReloadPage(timeSpan)
+    try:
+        timeInterval = float(input(
+            "\033[1;36mWrite time interval for auto reloading the webpage (press enter or anything else for default 0.8 sec) in sec: "))
+    except ValueError:  # either user press enter or written any string value
+        print("\033[4;32mSelected Time Interval is 0.8 sec.\033[0m")
+        timeInterval = None
     else:
-        autoReloadPage(timeSpan, timeInterval)
+        print("\033[1;32mSelected Time Interval is ",
+              timeInterval, " sec.\033[0m")
+    finally:
+        if timeInterval is None:
+            autoReloadPage(timeSpan)
+        else:
+            autoReloadPage(timeSpan, timeInterval)
+
+
+if __name__ == "__main__":
+    main()
