@@ -7,8 +7,10 @@
 """
 from pyautogui import hotkey
 from time import sleep
-# importing timeSpecial.py module present in current directory to perform time related operations.
-import include.timeSpecial as myTime
+import sys
+# importing TimeSpecial Class from timeSpecial.py module present in include directory to perform time related operations.
+sys.path.append("..//include")
+from include.timeSpecial import TimeSpecial as myTime
 
 
 def calculateFinalTime(startTime: tuple, minute: int) -> tuple:
@@ -75,8 +77,7 @@ def autoReloadPage(timeSpan: int | None, timeInterval: float | None = 0.8) -> No
 
 
 def main():
-    print(
-        "\033[1;36m\033[2J\033[HDo you want to add time span for auto reloading the webpage?")
+    print("\033[1;36m\033[2J\033[HDo you want to add time span for auto reloading the webpage?")
     print("\033[1;32mIf yes then write time (in minutes) else press enter or anything else for auto reloading page for infinite duration..")
     try:
         timeSpan = int(
@@ -87,8 +88,7 @@ def main():
         timeSpan = None
 
     try:
-        timeInterval = float(input(
-            "\033[1;36mWrite time interval for auto reloading the webpage (press enter or anything else for default 0.8 sec) in sec: "))
+        timeInterval = float(input("\033[1;36mWrite time interval for auto reloading the webpage (press enter or anything else for default 0.8 sec) in sec: "))
     except ValueError:  # either user press enter or written any string value
         print("\033[4;32mSelected Time Interval is 0.8 sec.\033[0m")
         timeInterval = None
